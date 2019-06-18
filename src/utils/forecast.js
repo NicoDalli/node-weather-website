@@ -8,10 +8,12 @@ const forecast = (latitude,longitude,callback) => {
         } else if (body.error) {
             callback('No se ha encontrado la ubicacion');
         } else {
+            console.log(body.currently)
             currently = body.currently
             temp = currently.temperature;
-            chance = currently.precipProbability
-            callback(undefined, body.daily.data[0].summary + ' Hacen ' + temp + '°C grados. Hay una probabilidad de lluvia de ' + (chance * 100) + '%');
+            chance = currently.precipProbability * 100
+            humidity = currently.humidity * 100
+            callback(undefined, body.daily.data[0].summary + ' Hacen ' + temp + '°C grados. Hay una probabilidad de lluvia de ' + chance + '% y una humedad del ' + humidity + '%');
         }
     })
 }
